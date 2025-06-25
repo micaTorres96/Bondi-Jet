@@ -1,32 +1,50 @@
 
 public abstract class Vuelo {
-	String aeropuertoSalida;
-	String aeropuertoLlegada;
-	String fecha;
-	Integer pasajeros;
-
-//	double recaudado; duda
-//	double impuestos; duda
+	private String aeropuertoSalida;
+	private String aeropuertoLlegada;
+	private String fecha;
+	private Integer pasajeros;
+	
+	private static int codigoDeVuelo = 1;
 	
 	public Vuelo(String aeropuertoSalida, String aeropuertoLlegada,String fecha, Integer pasajeros) {
 		this.aeropuertoSalida = aeropuertoSalida;
 		this.aeropuertoLlegada = aeropuertoLlegada;
 		this.fecha = fecha;
 		this.pasajeros = pasajeros;
+
+	}
+	public String aeropuertoLlegada() {
+		return aeropuertoLlegada;
+	}	
+	
+	public String aeropuertoSalida() {
+		return aeropuertoSalida;
+	}
+	public String fecha() {
+		return fecha;
 	}
 	
-	public abstract void valorPasaje();
-
-	public abstract double costoTotalVuelo();
+	public String generarTipoDeVuelo(String tipo) {
+		return (codigoDeVuelo++) + "-" + tipo;
+	}
 		
-	public abstract double totalRecaudadoVuelo();
+	public int decrementarCodigoVuelo() {
+		if(codigoDeVuelo <= 0) {
+			throw new RuntimeException("No hay mas vuelos disponibles registrados");
+		}
+		return codigoDeVuelo--;
+	}
+	
+	public abstract String obtenerTipoDeVuelo();
+	
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Origen: ").append(aeropuertoSalida);
-		sb.append("\nDestino: ").append(aeropuertoLlegada);
-		sb.append("\nfecha: ").append(fecha);
-		sb.append("\nPasajeros: ").append(pasajeros).append("\n");
+		sb.append(" -Origen: ").append(aeropuertoSalida);
+		sb.append(" -Destino: ").append(aeropuertoLlegada);
+		sb.append(" -Fecha: ").append(fecha);
+		sb.append(" -Pasajeros: ").append(pasajeros);
 		return sb.toString();
-	}
+	}	
 }

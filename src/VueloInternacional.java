@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 public class VueloInternacional extends VueloPublico {
 	private int cantRefrigerios;
@@ -10,33 +9,39 @@ public class VueloInternacional extends VueloPublico {
 		this.escalas = escalas;
 	}
 	
-	public void valorPasaje() {}
-	
-	public double costoTotalVuelo() {
-		return 0;
+	@Override
+	public String obtenerTipoDeVuelo() {
+		return "INTERNACIONAL";
 	}
 	
-	public double totalRecaudadoVuelo() {
-		return 0;
-	}
-	public int asientosDisponibles() {
-		return 0;
-	}
-	
-	public void reprogramarVuelo() {
+	//calcula el valor de pasaje, se necesita ingresar numero de asiento para saber a que seccion pertenece
+	public double valorPasaje(int nroAsiento) {
+		double costoBase = super.valorPasaje(nroAsiento); //incluye 1 refrigerio $26.000
 		
+		double costoRefrigerio = (cantRefrigerios -1) * super.valorRefrigerio(); //OK devuelve $12.000
+		
+		double total = costoBase + costoRefrigerio;
+		
+		return total * 1.2;
 	}
 	
-	public String[] destinoEscalas() {
-		return escalas;
+/*Metodo que recorre escalas y las imprime en el toString de Vuelo Internacional*/
+	public String mostrarEscalas() {
+		StringBuilder asiento = new StringBuilder();
+		for (String escala :  escalas)
+			asiento.append("|").append(escala).append("|");
+		return asiento.toString();
 	}
-	
+
+	/*toString de Vuelo Internacional con sus atributos heredados y propios
+	 * Fue utilizado StringBuilder (Tecnologia Java)
+	 * */
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
-		sb.append("\nCantidad de Refrigerios: ").append(cantRefrigerios);
-		sb.append("\nEscalas: ").append(escalas).append("\n");
+		sb.append(" -Cantidad de Refrigerios: ").append(cantRefrigerios);
+		sb.append(" -Escalas: ").append(mostrarEscalas()).append("\n");
 		return sb.toString();
 	}
 }

@@ -12,17 +12,29 @@ public class Cliente {
 		this.registrado = false;
 	}
 	
-	public int dni () {
+	public void registrarClienteComoPasajero() {
+		this.registrado = true;
+	}
+	
+	public void cancelarPasajeCliente() {
+		if(registrado == true)
+			registrado = false;
+	}
+	
+	public int documento(){
 		return dni;
 	}
 	
-	public void registrarClienteComoPasajero() {
-		registrado = true;
+	public String nombre() {
+		return nombre;
+	}
+	public String telefono() {
+		return telefono;
 	}
 	
 	public String toString() { 
 		StringBuilder sb = new StringBuilder();
-		sb.append("DNI: ").append(dni);
+		sb.append(" -DNI: ").append(dni);
 		sb.append(" -Nombre: ").append(nombre);
 		sb.append(" -Telefono: ").append(telefono).append("\n");
 		return sb.toString();
